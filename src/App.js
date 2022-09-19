@@ -1,9 +1,8 @@
+import Directory from "./components/directory/Directory";
 
 function App() {
   return (
-    <div className="App">
-      salam
-    </div>
+    <Directory />
   );
 }
 
