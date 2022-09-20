@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormInput from "../form-input/FormInput";
+import Button from '../button/button'
 import './signUpForm.styles.scss'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase'
 const defualtFormFeilds = {
@@ -50,7 +51,7 @@ const SignUpForm = () => {
         <FormInput label='password' type="password" name="password" required onChange={handlechange} value={password} />
 
         <FormInput label='confirmPassword' type="password" name="confirmPassword" required onChange={handlechange} value={confirmPassword} />
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   )
