@@ -24,16 +24,13 @@ const SignINForm = () => {
   }
   //---------------------------------------------------------------sign in with google ------------------------------------------------
   const signInWithGoogle = async () => {
-    const response = await signInWithGooglePopup()
-    await createUserDocumentFromAuth(response.user)
-    setCurrentUser(response.user)
+    await signInWithGooglePopup()
   }
   //---------------------------------------------------------sign in with email and password----------------------------------------------------------
   const signinWithEmailAndPassword = async (event) => {
     event.preventDefault()
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(email, password)
-      setCurrentUser(user)
       resetState()
     } catch (error) {
       console.log(error.code);

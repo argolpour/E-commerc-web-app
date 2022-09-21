@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import FormInput from "../form-input/FormInput";
 import Button from '../button/button'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase'
-import { UserContext } from "../../context/userContext";
 import { toast } from 'react-toastify'
 
 const defualtFormFeilds = {
@@ -15,7 +14,6 @@ const defualtFormFeilds = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defualtFormFeilds)
   const { displayName, email, password, confirmPassword } = formFields;
-  const { setCurrentUser } = useContext(UserContext)
   //----------------------------------------------------------------input onChange Handler-----------------------------------------------------------
   const handlechange = (event) => {
     const { name, value } = event.target;
@@ -37,7 +35,6 @@ const SignUpForm = () => {
       if (response) {
         await createUserDocumentFromAuth(response.user, { displayName })
         resetState()
-        setCurrentUser(response.user)
       }
 
     } catch (error) {
