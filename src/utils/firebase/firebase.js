@@ -13,7 +13,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account"
@@ -34,7 +33,6 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   // check whether user snapshot exist in firestore database or not
   const userSnapShot = await getDoc(userDocRef)
   console.log(userSnapShot.exists());
-
   // create user object if it does not existx
   if (!userSnapShot.exists()) {
     const { displayName, email } = userAuth;
@@ -53,14 +51,11 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   }
   return userDocRef;
 }
-
 //--------------------------------------------------------------creat user by email & password--------------------------------------------------------
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 }
-
-
 //----------------------------------------------------------------sign in by email & password--------------------------------------------------------
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
