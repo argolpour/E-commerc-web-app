@@ -1,9 +1,11 @@
+import './signUpForm.styles.scss'
 import { useContext, useState } from "react";
 import FormInput from "../form-input/FormInput";
 import Button from '../button/button'
-import './signUpForm.styles.scss'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase'
 import { UserContext } from "../../context/userContext";
+import { toast } from 'react-toastify'
+
 const defualtFormFeilds = {
   displayName: '',
   email: '',
@@ -27,7 +29,7 @@ const SignUpForm = () => {
   const signupWithEmailAndPaswword = async (event) => {
     event.preventDefault()
     if (password !== confirmPassword) {
-      alert("password do not match")
+      toast.error("password do not match")
       return
     };
     try {
@@ -42,9 +44,9 @@ const SignUpForm = () => {
       console.log(error.message, error.code);
       switch (error.code) {
         case 'auth/weak-password':
-          alert(' Password should be at least 6 characters')
+          toast.error(' Password should be at least 6 characters')
         case 'auth/email-already-in-use':
-          alert(' this user with entered email is already exist');
+          toast.error(' this user with entered email is already exist');
       }
     }
   }
