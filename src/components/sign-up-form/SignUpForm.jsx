@@ -12,11 +12,17 @@ const defualtFormFeilds = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defualtFormFeilds)
   const { displayName, email, password, confirmPassword } = formFields;
+  //----------------------------------------------------------------input onChange Handler-----------------------------------------------------------
   const handlechange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value })
   }
-  const submitHndler = async (event) => {
+  //-----------------------------------------------------------------reset state----------------------------------------------------------------------
+  const resetState = () => {
+    setFormFields(defualtFormFeilds)
+  }
+  //-------------------------------------------------------------signUp with Email And Password-----------------------------------
+  const signupWithEmailAndPaswword = async (event) => {
     event.preventDefault()
     if (password !== confirmPassword) {
       alert("password do not match")
@@ -26,7 +32,8 @@ const SignUpForm = () => {
       const response = await createAuthUserWithEmailAndPassword(email, password)
       console.log(response);
       if (response) {
-        const userDocRef = await createUserDocumentFromAuth(response.user, { displayName })
+        await createUserDocumentFromAuth(response.user, { displayName })
+        resetState()
       }
 
     } catch (error) {
@@ -43,13 +50,10 @@ const SignUpForm = () => {
     <div className="sign-up-container">
       <h2>you do not have account</h2>
       <span>Sign Up With Your Email And Password</span>
-      <form onSubmit={submitHndler} >
+      <form onSubmit={signupWithEmailAndPaswword} >
         <FormInput label='Display Name' type="text" name="displayName" required onChange={handlechange} value={displayName} />
-
         <FormInput label='email' type="email" name="email" required onChange={handlechange} value={email} />
-
         <FormInput label='password' type="password" name="password" required onChange={handlechange} value={password} />
-
         <FormInput label='confirmPassword' type="password" name="confirmPassword" required onChange={handlechange} value={confirmPassword} />
         <Button type="submit">Sign Up</Button>
       </form>

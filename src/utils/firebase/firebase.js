@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
-
+//-----------------------------------------------------------firebase initial config------------------------------------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyArWtQB-GetGV-AsCSRuW__eL7n1PJ6ZkY",
   authDomain: "crown-clothing-db-990ae.firebaseapp.com",
@@ -18,23 +18,21 @@ const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account"
 })
-
+//------------------------------------------------sign in with google --------------------------------------------------------------------------------
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 // export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
-
+//------------------------------------creation of our database by using firestore------------------------------------------------------------------
 //create a refrerence to firestore database
 export const db = getFirestore();
 //create a document inside of our database by using user athentication info gotten by athentication methode object 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   //create document named users 
   if (!userAuth) return
+  //creation of users collection along with each user document base on uid given by google
   const userDocRef = doc(db, 'users', userAuth.uid);
-  console.log(userDocRef);
-
-  const userSnapShot = await getDoc(userDocRef)
-  console.log(userSnapShot);
   // check whether user snapshot exist in firestore database or not
+  const userSnapShot = await getDoc(userDocRef)
   console.log(userSnapShot.exists());
 
   // create user object if it does not existx
@@ -56,12 +54,14 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   return userDocRef;
 }
 
-//creat user by email & password
+//--------------------------------------------------------------creat user by email & password--------------------------------------------------------
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 }
-//sign in by email & password
+
+
+//----------------------------------------------------------------sign in by email & password--------------------------------------------------------
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
