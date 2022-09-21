@@ -17,10 +17,15 @@ const SignINForm = () => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value })
   }
+  //-----------------------------------------------------------------reset state----------------------------------------------------------------------
+  const resetState = () => {
+    setFormFields(defualtFormFeilds)
+  }
   //---------------------------------------------------------------sign in with google ------------------------------------------------
   const signInWithGoogle = async () => {
     const response = await signInWithGooglePopup()
     await createUserDocumentFromAuth(response.user)
+    setCurrentUser(response.user)
   }
   //---------------------------------------------------------sign in with email and password----------------------------------------------------------
   const signinWithEmailAndPassword = async (event) => {
@@ -28,6 +33,7 @@ const SignINForm = () => {
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(email, password)
       setCurrentUser(user)
+      resetState()
     } catch (error) {
       console.log(error);
     }
