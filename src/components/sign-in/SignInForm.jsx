@@ -36,7 +36,16 @@ const SignINForm = () => {
       setCurrentUser(user)
       resetState()
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
+      switch (error.code) {
+        case 'auth/wrong-password':
+          toast.error('the password is wrong')
+          break;
+        case 'auth/user-not-found':
+          toast.error('the user not found')
+        default:
+          console.log(error.code);
+      }
     }
   }
   return (
