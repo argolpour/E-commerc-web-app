@@ -2,7 +2,7 @@ import './signinForm.styles.scss'
 import { useContext, useState } from "react";
 import FormInput from "../form-input/FormInput";
 import Button from '../button/button'
-import { createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase'
+import {  signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase'
 import { UserContext } from "../../context/userContext";
 import { toast } from 'react-toastify'
 const defualtFormFeilds = {
@@ -12,8 +12,7 @@ const defualtFormFeilds = {
 const SignINForm = () => {
   const [formFields, setFormFields] = useState(defualtFormFeilds)
   const { email, password } = formFields;
-  const { setCurrentUser } = useContext(UserContext)
-  //---------------------------------------------------------input onchange handler-------------------------------------------------------------------
+   //---------------------------------------------------------input onchange handler-------------------------------------------------------------------
   const handlechange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value })

@@ -1,5 +1,5 @@
 import './signUpForm.styles.scss'
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import FormInput from "../form-input/FormInput";
 import Button from '../button/button'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase'
@@ -42,8 +42,12 @@ const SignUpForm = () => {
       switch (error.code) {
         case 'auth/weak-password':
           toast.error(' Password should be at least 6 characters')
+          break
         case 'auth/email-already-in-use':
           toast.error(' this user with entered email is already exist');
+          break
+          default:
+          toast.error(error.code)
       }
     }
   }
