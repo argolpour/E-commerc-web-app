@@ -5,6 +5,7 @@ import { useContext } from "react"
 import { UserContext } from "../../context/userContext"
 import { signOutUser } from '../../utils/firebase/firebase'
 import CardIcon from "../../components/cart-icon/CardIcon"
+import CartDropDown from "../../components/cart-dropdown/CartDropDown"
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   return (
@@ -23,7 +24,9 @@ const Navigation = () => {
           <CardIcon />
 
         </div>
+        <CartDropDown />
       </div>
+
       <Outlet />
     </>
   )
