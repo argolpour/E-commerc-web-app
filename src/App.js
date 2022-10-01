@@ -4,14 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navigation from "./Routes/Navigation/Navigation";
 import Authentication from "./Routes/Authentication/Authentication";
 import { ToastContainer } from 'react-toastify'
-
-
-
-const Shop = () => {
-  return (
-    <h2>Shop Container</h2>
-  )
-}
+import Shop from './Routes/Shop/Shop'
 function App() {
   return (
     <>
