@@ -4,6 +4,7 @@ import { ReactComponent as Crown } from "../../assests/svg/crown.svg"
 import { useContext } from "react"
 import { UserContext } from "../../context/userContext"
 import { signOutUser } from '../../utils/firebase/firebase'
+import CardIcon from "../../components/cart-icon/CardIcon"
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   return (
@@ -19,6 +20,7 @@ const Navigation = () => {
           {currentUser ? <span style={{ cursor: 'pointer' }} onClick={signOutUser}>Sign Out</span> : <Link className="nav-link " to='/auth'>
             Sign in
           </Link>}
+          <CardIcon />
 
         </div>
       </div>
