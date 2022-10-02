@@ -12,9 +12,9 @@ const CartDropDown = () => {
   }
   return (
     <div className="cart-dropdown-container">
-      <div className="cart-items">
+      {cartItems.length ? <div className="cart-items">
         {cartItems.map(item => <CartItem key={item.id} cartitem={item} />)}
-      </div>
+      </div> : <div className='no-data-container'><h4 className='no-data' >There is No product Here</h4></div>}
       <Button buttonType='inverted' onClick={navigateToCheckout}>Go  To Checkout</Button>
     </div>
   )
