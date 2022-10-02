@@ -4,14 +4,11 @@ import { createContext } from 'react'
 const addCartItem = (cartItems, productToAdd) => {
   //find if cartitems contains productToAdd
   const existedItem = cartItems.find(cartItem => cartItem.id === productToAdd.id)
-
-
   //if found , increment quantity
   if (existedItem) {
     return cartItems.map(cartItem => cartItem.id === productToAdd.id ? { ...cartItem, quantity: cartItem.quantity + 1 }
       : cartItem)
   }
-
   //return new array with modified cartitems /new cart item
   return [...cartItems, { ...productToAdd, quantity: 1 }]
 }
