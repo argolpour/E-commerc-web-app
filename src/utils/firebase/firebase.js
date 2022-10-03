@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc, collection, writeBatch } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore'
 //-----------------------------------------------------------firebase initial config------------------------------------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyArWtQB-GetGV-AsCSRuW__eL7n1PJ6ZkY",
@@ -79,3 +79,16 @@ export const signOutUser = async () => {
 }
 //----------------------------------------------------------------on auth change----------------------------------------------------------------------
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
+//----------------------------------------------------------------get document from firestorm----------------------------------------------------------------------
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySanpShot = await getDocs(q);
+  const categoryMap = querySanpShot.docs.reduce((acc, docSnapShot) => {
+    const { title, items } = docSnapShot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {})
+  return categoryMap;
+}
