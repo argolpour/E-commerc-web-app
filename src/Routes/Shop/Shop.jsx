@@ -15,7 +15,7 @@ const Shop = () => {
           <div className='products-container '>
             {categoriesMap[title].map(product => <ProductCard key={product.id} product={product} />)}
           </div>
-          <Spinner />
+
         </div>
       ))}
     </>
