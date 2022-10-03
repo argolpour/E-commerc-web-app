@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch } from 'firebase/firestore'
 //-----------------------------------------------------------firebase initial config------------------------------------------------------------------
 const firebaseConfig = {
   apiKey: "AIzaSyArWtQB-GetGV-AsCSRuW__eL7n1PJ6ZkY",
@@ -24,6 +24,18 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 //------------------------------------creation of our database by using firestore------------------------------------------------------------------
 //create a refrerence to firestore database
 export const db = getFirestore();
+//create a category collection along with all data into firestorm
+export const addCollectionAndDocument = async (collectionKey, objectToAdd) => {
+  const collectionRef = collection(db, collectionKey)
+  const batch = writeBatch(db)
+  objectToAdd.forEach(object => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object)
+  });
+
+  await batch.commit()
+  console.log('done');
+}
 //create a document inside of our database by using user athentication info gotten by athentication methode object 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   //create document named users 
