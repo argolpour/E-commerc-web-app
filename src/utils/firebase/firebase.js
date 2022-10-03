@@ -79,11 +79,10 @@ export const signOutUser = async () => {
 }
 //----------------------------------------------------------------on auth change----------------------------------------------------------------------
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
-//----------------------------------------------------------------get document from firestorm----------------------------------------------------------------------
+//----------------------------------------------------------------get document from ------------------------------------------------------------------
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
-
   const querySanpShot = await getDocs(q);
   const categoryMap = querySanpShot.docs.reduce((acc, docSnapShot) => {
     const { title, items } = docSnapShot.data();
