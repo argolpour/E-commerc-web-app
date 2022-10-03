@@ -4,6 +4,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  position: sticky;
+  top:0;
+ right:0;
+  z-index: 40;
+
 
   .logo-container {
     height: 100%;
