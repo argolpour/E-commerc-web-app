@@ -28,12 +28,12 @@ const Checkout = () => {
         </div>
       </div>
 
-      {cartItems.map((cartitem) => {
+      {cartItems.length > 0 ? cartItems.map((cartitem) => {
 
         return (
           <CheckoutItem key={cartitem.id} cartItem={cartitem} />
         )
-      })}
+      }) : <h2>No Cart Items Here</h2>}
       <span className="total">Total:${cartTotal}</span>
     </div>
   )
