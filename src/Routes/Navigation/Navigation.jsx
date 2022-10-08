@@ -12,15 +12,15 @@ const Navigation = () => {
   const { isCartDropDownOpen } = useContext(CartContext)
   return (
     <>
-      <NavigationContainer className="navigation">
-        <LogoContainer className="logo-container" to='/'>
+      <NavigationContainer>
+        <LogoContainer to='/'>
           <Crown />
         </LogoContainer>
-        <NavLinks className="nav-links-container">
-          <NavLink className="nav-link " to='/shop'>
+        <NavLinks >
+          <NavLink to='/shop'>
             Shop
           </NavLink>
-          {currentUser ? <span style={{ cursor: 'pointer' }} onClick={signOutUser}>Sign Out</span> : <NavLink className="nav-link " to='/auth'>
+          {currentUser ? <NavLink as='span' style={{ cursor: 'pointer' }} onClick={signOutUser}>Sign Out</NavLink> : <NavLink to='/auth'>
             Sign in
           </NavLink>}
           <CardIcon />

@@ -11,10 +11,10 @@ const CartDropDown = () => {
     navigate('/checkout')
   }
   return (
-    <CartDropDownContainer className="cart-dropdown-container">
-      {cartItems.length ? <Cartitems className="cart-items">
+    <CartDropDownContainer >
+      {cartItems.length ? <Cartitems >
         {cartItems.map(item => <CartItem key={item.id} cartitem={item} />)}
-      </Cartitems> : <EmptyMessageContainer className='no-data-container'><h4 className='no-data' >There is No product Here</h4></EmptyMessageContainer>}
+      </Cartitems> : <EmptyMessageContainer ><h4 className='no-data' >There is No product Here</h4></EmptyMessageContainer>}
       <Button buttonType={BUTTON_TYPE_CLASS.inverted} onClick={navigateToCheckout}>Go  To Checkout</Button>
     </CartDropDownContainer>
   )
