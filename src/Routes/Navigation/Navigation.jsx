@@ -1,5 +1,5 @@
 import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles.js'
-import { Link, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { ReactComponent as Crown } from "../../assests/svg/crown.svg"
 import { useContext } from "react"
 import { UserContext } from "../../context/userContext"
