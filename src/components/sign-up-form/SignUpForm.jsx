@@ -1,5 +1,5 @@
-import './signUpForm.styles.scss'
-import {  useState } from "react";
+import { SignUpContainer } from './signUpForm.styles.js'
+import { useState } from "react";
 import FormInput from "../form-input/FormInput";
 import Button from '../button/button'
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase'
@@ -46,13 +46,13 @@ const SignUpForm = () => {
         case 'auth/email-already-in-use':
           toast.error(' this user with entered email is already exist');
           break
-          default:
+        default:
           toast.error(error.code)
       }
     }
   }
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>you do not have account</h2>
       <span>Sign Up With Your Email And Password</span>
       <form onSubmit={signupWithEmailAndPaswword} >
@@ -62,7 +62,7 @@ const SignUpForm = () => {
         <FormInput label='confirmPassword' type="password" name="confirmPassword" required onChange={handlechange} value={confirmPassword} />
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   )
 }
 
