@@ -1,8 +1,8 @@
 import './signinForm.styles.scss'
 import { useState } from "react";
 import FormInput from "../form-input/FormInput";
-import Button from '../button/button'
-import {  signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase'
+import Button, { BUTTON_TYPE_CLASS } from '../button/button'
+import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase'
 import { toast } from 'react-toastify'
 const defualtFormFeilds = {
   email: '',
@@ -11,7 +11,7 @@ const defualtFormFeilds = {
 const SignINForm = () => {
   const [formFields, setFormFields] = useState(defualtFormFeilds)
   const { email, password } = formFields;
-   //---------------------------------------------------------input onchange handler-------------------------------------------------------------------
+  //---------------------------------------------------------input onchange handler-------------------------------------------------------------------
   const handlechange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value })
@@ -28,7 +28,7 @@ const SignINForm = () => {
   const signinWithEmailAndPassword = async (event) => {
     event.preventDefault()
     try {
-     await signInAuthUserWithEmailAndPassword(email, password)
+      await signInAuthUserWithEmailAndPassword(email, password)
       resetState()
     } catch (error) {
       console.log(error.code);
@@ -53,7 +53,7 @@ const SignINForm = () => {
         <FormInput label='password' type="password" name="password" required onChange={handlechange} value={password} />
         <div className="buttons-container">
           <Button type="submit">Sign in</Button>
-          <Button type="button" buttonType='google' onClick={signInWithGoogle}>Sign in With Google</Button>
+          <Button type="button" buttonType={BUTTON_TYPE_CLASS.google} onClick={signInWithGoogle}>Sign in With Google</Button>
         </div>
 
       </form>
