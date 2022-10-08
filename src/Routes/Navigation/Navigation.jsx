@@ -1,5 +1,5 @@
+import { NavigationContainer, LogoContainer, NavLinks, NavLink } from './navigation.styles.js'
 import { Link, Outlet } from "react-router-dom"
-import './navigation.styles.scss'
 import { ReactComponent as Crown } from "../../assests/svg/crown.svg"
 import { useContext } from "react"
 import { UserContext } from "../../context/userContext"
@@ -12,22 +12,22 @@ const Navigation = () => {
   const { isCartDropDownOpen } = useContext(CartContext)
   return (
     <>
-      <div className="navigation">
-        <Link className="logo-container" to='/'>
+      <NavigationContainer className="navigation">
+        <LogoContainer className="logo-container" to='/'>
           <Crown />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link " to='/shop'>
+        </LogoContainer>
+        <NavLinks className="nav-links-container">
+          <NavLink className="nav-link " to='/shop'>
             Shop
-          </Link>
-          {currentUser ? <span style={{ cursor: 'pointer' }} onClick={signOutUser}>Sign Out</span> : <Link className="nav-link " to='/auth'>
+          </NavLink>
+          {currentUser ? <span style={{ cursor: 'pointer' }} onClick={signOutUser}>Sign Out</span> : <NavLink className="nav-link " to='/auth'>
             Sign in
-          </Link>}
+          </NavLink>}
           <CardIcon />
 
-        </div>
+        </NavLinks>
         {isCartDropDownOpen && <CartDropDown />}
-      </div>
+      </NavigationContainer>
 
       <Outlet />
     </>
