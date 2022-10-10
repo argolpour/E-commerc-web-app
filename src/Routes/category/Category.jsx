@@ -10,7 +10,6 @@ const Category = () => {
   const { categoriesMap } = useContext(CategoriesContext)
   const [products, setProducts] = useState(categoriesMap[category])
   const [loading, setLoading] = useState(true)
-  console.log(loading);
   useEffect(() => {
     setProducts(categoriesMap[category])
     if (categoriesMap[category]) {
